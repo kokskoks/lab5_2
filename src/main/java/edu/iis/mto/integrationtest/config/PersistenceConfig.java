@@ -32,11 +32,11 @@ public class PersistenceConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PersistenceConfig.class);
 	
 
-	private static final String DATA_SCRIPT_FILENAME_SUFFIX = "-import.sql";
+	private static final String DATA_SCRIPT_FILENAME_SUFFIX = "-data-script.sql";
 
 	private static final String SQL_FOLDER_NAME = "sql";
 	
-	private static final String SQL_SCHEMA_SCRIPT_PATH = SQL_FOLDER_NAME + "/schema.sql";
+	private static final String SQL_SCHEMA_SCRIPT_PATH = SQL_FOLDER_NAME + "/schema-script.sql";
 
 	@Value("${database.url}")
 	private String databaseUrl;

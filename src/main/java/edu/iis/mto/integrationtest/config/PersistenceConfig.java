@@ -34,9 +34,9 @@ public class PersistenceConfig {
 
 	private static final String DATA_SCRIPT_FILENAME_SUFFIX = "-data-script.sql";
 
-	private static final String SQL_FOLDER_NAME = "sql";
+	private static final String SQL_FOLDER_NAME = "sql/";
 	
-	private static final String SQL_SCHEMA_SCRIPT_PATH = SQL_FOLDER_NAME + "/schema-script.sql";
+	private static final String SQL_SCHEMA_SCRIPT_PATH = SQL_FOLDER_NAME + "schema-script.sql";
 
 	@Value("${database.url}")
 	private String databaseUrl;

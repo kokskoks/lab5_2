@@ -27,54 +27,59 @@ public class PersonRepositoryIntegrationTest extends IntegrationTest {
 	@Test
 	public void testSaveNewPersonAndCheckIsPersisted() {
 		long count = personRepository.count();
-		personRepository.save(a(person().withId(count + 1)
-				.withFirstName("Roberto").withLastName("Mancini")));
+		personRepository.save(a(person().withId(count + 1).withFirstName("Roberto").withLastName("Mancini")));
 		assertEquals(count + 1, personRepository.count());
-		assertEquals("Mancini", personRepository.findOne(count + 1)
-				.getLastName());
+		assertEquals("Mancini", personRepository.findOne(count + 1).getLastName());
 	}
-	
-	@Test 
-	public void deletePerson(){
+
+	@Test
+	public void deletePerson() {
 		long personId = 1;
-		
-		if(personRepository.exists(personId)){
+
+		if (personRepository.exists(personId)) {
 			personRepository.delete(personId);
 		} else {
 			fail("bad input data");
 		}
-		
+
 		assertEquals(personRepository.exists(personId), false);
 	}
-	
+
 	@Test
-	public void updatePerson(){
-		
+	public void updatePerson() {
+
 		long personId = 1;
-		
+
 		Person person = personRepository.findOne(personId);
-		
+
 		String oldFirstName = person.getFirstName();
 		String newFirstName = "Jan";
-		
-		if(newFirstName.equals(oldFirstName)){
+
+		if (newFirstName.equals(oldFirstName)) {
 			fail("names are the same, cannot verify updateing");
 		}
-		
+
 		person.setFirstName(newFirstName);
-		
+
 		personRepository.saveAndFlush(person);
-		
+
 		Person modifiedPerson = personRepository.findOne(personId);
-		
-		assertEquals( newFirstName, modifiedPerson.getFirstName());
-		
+
+		assertEquals(newFirstName, modifiedPerson.getFirstName());
+
+	}
+
+	@Test
+	public void findPersonByFirstNameLike() {
+
+		List<Person> marLikePersons = personRepository.findByFirstNameLike("%Mar%");
+
+		assertEquals(marLikePersons.size(), 2);
+		for(Person person : marLikePersons){
+			assertEquals(person.getFirstName().contains("Mar"), true);
+		}
 		
 	}
-	
-	
-	
-	
 
 	private Person a(PersonBuilder builder) {
 		return builder.build();
